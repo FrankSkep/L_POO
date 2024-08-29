@@ -32,3 +32,17 @@ void Persona::Saludar()
 {
     cout << "Hola\n";
 }
+
+// Getters y setters
+string Persona::getNombre() { return nombre; }
+void Persona::setNombre(string nombre) { this->nombre = nombre; }
+
+int Persona::getEdad() { return edad; }
+
+void Persona::setEdad(int edad)
+{
+    if (edad >= 13)
+    {
+        this->edad = edad;
+    }
+}

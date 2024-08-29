@@ -14,4 +14,11 @@ public:
     void HacerReir(int motivo);
     void Comer();
     void Saludar();
+
+    // Getters y setters
+    string getNombre();
+    void setNombre(string nombre);
+
+    int getEdad();
+    void setEdad(int edad);
 };

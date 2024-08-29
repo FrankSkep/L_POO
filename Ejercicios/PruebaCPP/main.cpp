@@ -1,17 +1,25 @@
 #include "Persona.h"
 #include <cstdlib>
+using namespace std;
 
 void clear();
+void pausa();
+void usarPersona(Persona *persona);
 
 int main()
 {
+    srand(time(0));
+
     Persona *p1 = new Persona("Juan", 25);
 
     int opcion;
     do
     {
-        cout << "1. Saludar\n2. Comer\n3. HacerReir\n0. Salir\n: ";
+        clear();
+
+        cout << "+- Acciones -+\n1. Saludar\n2. Comer\n3. HacerReir\n4. Todo\n0. Salir\n: ";
         cin >> opcion;
+        cout << endl;
 
         switch (opcion)
         {
@@ -31,6 +39,10 @@ int main()
         }
         break;
 
+        case 4:
+            usarPersona(p1);
+            break;
+
         case 0:
             break;
 
@@ -38,9 +50,24 @@ int main()
             cout << "Opcion no valida\n";
             break;
         }
+        pausa();
+        clear();
     } while (opcion != 0);
-    delete p1;
-    return 0;
+
+    delete p1; // Liberar la memoria
 }
 
 void clear() { system("clear"); }
+void pausa()
+{
+    system("read -p 'Press Enter to continue...' var");
+}
+
+void usarPersona(Persona *persona)
+{
+    cout << "+-- Utilizando persona " << persona->getNombre() << " --+" << endl;
+    persona->Saludar();
+    persona->Comer();
+    persona->HacerReir(rand());
+    cout << "* Persona utilizada *\n";
+}
