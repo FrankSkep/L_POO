@@ -6,12 +6,12 @@ Persona::Persona(string nombre, int edad)
     this->edad = edad;
 }
 
-void Persona::Reir()
+void Persona::Reir() const
 {
     cout << "Jajaja\n";
 }
 
-void Persona::HacerReir(int motivo)
+void Persona::HacerReir(int motivo) const
 {
     if (motivo % 3 == 0)
     {
@@ -23,21 +23,21 @@ void Persona::HacerReir(int motivo)
     }
 }
 
-void Persona::Comer()
+void Persona::Comer() const
 {
     cout << "Ñam ñam\n";
 }
 
-void Persona::Saludar()
+void Persona::Saludar() const
 {
     cout << "Hola\n";
 }
 
 // Getters y setters
-string Persona::getNombre() { return nombre; }
+string Persona::getNombre() const { return nombre; }
 void Persona::setNombre(string nombre) { this->nombre = nombre; }
 
-int Persona::getEdad() { return edad; }
+int Persona::getEdad() const { return edad; }
 
 void Persona::setEdad(int edad)
 {

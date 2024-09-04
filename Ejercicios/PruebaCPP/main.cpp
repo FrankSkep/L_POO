@@ -4,7 +4,7 @@ using namespace std;
 
 void clear();
 void pausa();
-void usarPersona(Persona *persona);
+void usarPersona(const Persona &persona);
 
 int main()
 {
@@ -40,7 +40,7 @@ int main()
         break;
 
         case 4:
-            usarPersona(p1);
+            usarPersona(*p1);
             break;
 
         case 0:
@@ -63,11 +63,11 @@ void pausa()
     system("read -p 'Press Enter to continue...' var");
 }
 
-void usarPersona(Persona *persona)
+void usarPersona(const Persona &persona)
 {
-    cout << "+-- Utilizando persona " << persona->getNombre() << " --+" << endl;
-    persona->Saludar();
-    persona->Comer();
-    persona->HacerReir(rand());
+    cout << "+-- Utilizando persona " << persona.getNombre() << " --+" << endl;
+    persona.Saludar();
+    persona.Comer();
+    persona.HacerReir(rand());
     cout << "* Persona utilizada *\n";
 }
