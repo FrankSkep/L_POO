@@ -12,7 +12,7 @@ private:
     bool isOn;
     bool isTurningLeft;
     bool isTurningRight;
-    sf::Sprite sprite;
+    sf::Sprite spriteCar;
     sf::Texture textureOff, textureOn, textureLeft, textureRight, textureBrake;
 
 public:
@@ -35,26 +35,26 @@ public:
         textureLeft.loadFromFile("assets/giro_izquierda.png");
         textureRight.loadFromFile("assets/giro_derecha.png");
         textureBrake.loadFromFile("assets/freno.png");
-        sprite.setTexture(textureOff); // Por defecto el carro está apagado
-        sprite.setPosition(position);
-        sprite.setScale(1.2, 1.2);
+        spriteCar.setTexture(textureOff); // Por defecto el carro está apagado
+        spriteCar.setPosition(position);
+        spriteCar.setScale(1.2, 1.2);
     }
 
     void TurnOn()
     {
         isOn = true;
-        sprite.setTexture(textureOn);
+        spriteCar.setTexture(textureOn);
     }
     void TurnOff()
     {
         isOn = false;
-        sprite.setTexture(textureOff);
+        spriteCar.setTexture(textureOff);
     }
     void Accelerate(float deltaTime)
     {
         if (isOn && fuel > 0)
         {
-            speed += 850 * deltaTime; // Incrementa la velocidad
+            speed += 800 * deltaTime; // Incrementa la velocidad
             fuel -= 35 * deltaTime;   // Decrementa gasolina
         }
     }
@@ -66,7 +66,7 @@ public:
             if (speed > 0)
             {
                 speed = std::max(0.0f, speed - 1500 * deltaTime);
-                sprite.setTexture(textureBrake);
+                spriteCar.setTexture(textureBrake);
             }
         }
     }
@@ -77,7 +77,7 @@ public:
         {
             angle -= 250 * deltaTime; // Reduce el giro
             direction = Rotar(direction, -100 * deltaTime);
-            sprite.setTexture(textureLeft);
+            spriteCar.setTexture(textureLeft);
         }
     }
     void TurnRight(float deltaTime)
@@ -86,14 +86,14 @@ public:
         {
             angle += 250 * deltaTime; // Incrementa el giro
             direction = Rotar(direction, 100 * deltaTime);
-            sprite.setTexture(textureRight);
+            spriteCar.setTexture(textureRight);
         }
     }
     void StopTurning()
     {
         if ((isTurningLeft || isTurningRight) && speed > 0)
         {
-            sprite.setTexture(textureOn);
+            spriteCar.setTexture(textureOn);
             isTurningLeft = isTurningRight = false;
         }
     }
@@ -111,18 +111,18 @@ public:
                 position.x = 0;
             if (position.y < 0)
                 position.y = 0;
-            if (position.x + sprite.getGlobalBounds().width > window.getSize().x)
-                position.x = window.getSize().x - sprite.getGlobalBounds().width;
-            if (position.y + sprite.getGlobalBounds().height > window.getSize().y)
-                position.y = window.getSize().y - sprite.getGlobalBounds().height;
+            if (position.x + spriteCar.getGlobalBounds().width > window.getSize().x)
+                position.x = window.getSize().x - spriteCar.getGlobalBounds().width;
+            if (position.y + spriteCar.getGlobalBounds().height > window.getSize().y)
+                position.y = window.getSize().y - spriteCar.getGlobalBounds().height;
 
-            sprite.setPosition(position);
+            spriteCar.setPosition(position);
         }
     }
 
     void Display(sf::RenderWindow &window)
     {
-        window.draw(sprite);
+        window.draw(spriteCar);
     }
 
     sf::Vector2f Rotar(sf::Vector2f v, float deg)

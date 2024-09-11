@@ -20,16 +20,16 @@ int main()
 
     // Crear la calle (simple rectángulo gris)
     sf::RectangleShape road(sf::Vector2f(SCR_WIDTH, SCR_HEIGHT));
-    road.setFillColor(sf::Color(50, 50, 50));  // Color gris para la calle
+    road.setFillColor(sf::Color(50, 50, 50)); // Color gris para la calle
     road.setPosition(0, 0);
 
     // Crear los carriles (más claros)
     sf::RectangleShape leftLane(sf::Vector2f(SCR_WIDTH / 3 - 10, SCR_HEIGHT));
-    leftLane.setFillColor(sf::Color(100, 100, 100)); // Color gris claro para los carriles
+    leftLane.setFillColor(sf::Color(100, 100, 100));                   // Color gris claro para los carriles
     leftLane.setPosition(SCR_WIDTH / 6 - leftLane.getSize().x / 2, 0); // Carril izquierdo
 
     sf::RectangleShape rightLane(sf::Vector2f(SCR_WIDTH / 3 - 10, SCR_HEIGHT));
-    rightLane.setFillColor(sf::Color(100, 100, 100)); // Color gris claro para los carriles
+    rightLane.setFillColor(sf::Color(100, 100, 100));                        // Color gris claro para los carriles
     rightLane.setPosition(SCR_WIDTH * 5 / 6 - rightLane.getSize().x / 2, 0); // Carril derecho
 
     // Crear las líneas centrales de la calle (blancas)
@@ -143,8 +143,7 @@ int main()
 
         // Actualizar el texto de la velocidad
         speed = car.getSpeed();
-        // stream para formatear velocidad
-        std::ostringstream stream;
+        std::ostringstream stream; // stream para formatear velocidad
         stream << std::fixed << std::setprecision(2) << speed;
         speedText.setString("Velocidad: " + stream.str() + " km/h");
 
