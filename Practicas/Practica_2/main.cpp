@@ -1,16 +1,15 @@
-#define SCR_WIDTH 800
-#define SCR_HEIGHT 600
-#define FUEL_MAX 100
-
 #include "Car.h"
 #include <iostream>
 #include <iomanip> // para setPrecision
 #include <sstream> // para ostringstream
+#define SCR_WIDTH 1280
+#define SCR_HEIGHT 720
+#define FUEL_MAX 100
 
 int main()
 {
     // Crear ventana
-    sf::RenderWindow window(sf::VideoMode(SCR_WIDTH, SCR_HEIGHT), "Practica 2 - LPOO");
+    sf::RenderWindow window(sf::VideoMode(SCR_WIDTH, SCR_HEIGHT), "P2 LPOO - Car");
 
     // Cargar la fuente
     sf::Font font;
@@ -19,42 +18,45 @@ int main()
         return -1;
     }
 
-    /******** Creacion de la calle *******/
-    // Crear la calle (rectángulo gris)
-    sf::RectangleShape street(sf::Vector2f(800, 200)); // Ancho 800, Alto 200
-    street.setFillColor(sf::Color(100, 100, 100));     // Color gris
-    street.setPosition(0, 200);                        // Posición centrada verticalmente en la pantalla
+    // Crear la calle (simple rectángulo gris)
+    sf::RectangleShape road(sf::Vector2f(SCR_WIDTH, SCR_HEIGHT));
+    road.setFillColor(sf::Color(50, 50, 50));  // Color gris para la calle
+    road.setPosition(0, 0);
 
-    // Crear las líneas de carril (rectángulos pequeños blancos)
-    sf::RectangleShape laneLine(sf::Vector2f(60, 5)); // Ancho 60, Alto 5
-    laneLine.setFillColor(sf::Color::White);          // Color blanco
+    // Crear los carriles (más claros)
+    sf::RectangleShape leftLane(sf::Vector2f(SCR_WIDTH / 3 - 10, SCR_HEIGHT));
+    leftLane.setFillColor(sf::Color(100, 100, 100)); // Color gris claro para los carriles
+    leftLane.setPosition(SCR_WIDTH / 6 - leftLane.getSize().x / 2, 0); // Carril izquierdo
 
-    // Variables para las líneas de carril
-    float lineSpacing = 100; // Espaciado entre las líneas
-    float lineOffset = 50;   // Offset para centrar la línea de carril en la calle
+    sf::RectangleShape rightLane(sf::Vector2f(SCR_WIDTH / 3 - 10, SCR_HEIGHT));
+    rightLane.setFillColor(sf::Color(100, 100, 100)); // Color gris claro para los carriles
+    rightLane.setPosition(SCR_WIDTH * 5 / 6 - rightLane.getSize().x / 2, 0); // Carril derecho
 
-    /*********************/
+    // Crear las líneas centrales de la calle (blancas)
+    sf::RectangleShape line(sf::Vector2f(10, SCR_HEIGHT));
+    line.setFillColor(sf::Color::White);
+    line.setPosition(SCR_WIDTH / 2 - 5, 0);
 
     // Crear el texto para mostrar la cantidad de gasolina
     sf::Text fuelText;
     fuelText.setFont(font);                  // Asignar la fuente
-    fuelText.setCharacterSize(28);           // Tamaño del texto
+    fuelText.setCharacterSize(26);           // Tamaño del texto
     fuelText.setFillColor(sf::Color::White); // Color del texto
     fuelText.setPosition(10, 10);            // Posición del texto en la pantalla
 
     // Crear el texto para mostrar la velocidad actual
     sf::Text speedText;
     speedText.setFont(font);                  // Asignar la fuente
-    speedText.setCharacterSize(28);           // Tamaño del texto
+    speedText.setCharacterSize(26);           // Tamaño del texto
     speedText.setFillColor(sf::Color::White); // Color del texto
     speedText.setPosition(10, 50);            // Posición del texto en la pantalla
 
     // Crear el texto para mostrar las instrucciones de las teclas
     sf::Text instructionsText;
     instructionsText.setFont(font);                     // Asignar la fuente
-    instructionsText.setCharacterSize(20);              // Tamaño del texto
+    instructionsText.setCharacterSize(26);              // Tamaño del texto
     instructionsText.setFillColor(sf::Color::White);    // Color del texto
-    instructionsText.setPosition(10, SCR_HEIGHT - 150); // Posición del texto en la pantalla
+    instructionsText.setPosition(10, SCR_HEIGHT - 200); // Posición del texto en la pantalla
     instructionsText.setString("E: Encender\nA: Apagar\nUp: Acelerar\nDown: Frenar\nLeft: Izquierda\nRight: Derecha");
 
     // Reloj para calcular deltaTime
@@ -65,7 +67,7 @@ int main()
     float speed = 0;
 
     // Crear el objeto Car
-    Car car(sf::Vector2f(SCR_WIDTH / 2 - 32, SCR_HEIGHT - 120), sf::Vector2f(0, -1), 0, 0, FUEL_MAX, false, false, false);
+    Car car(sf::Vector2f(SCR_WIDTH / 2 - 32, SCR_HEIGHT - 150), sf::Vector2f(0, -1), 0, 0, FUEL_MAX, false, false, false);
 
     // Bucle principal del juego
     while (window.isOpen())
@@ -148,7 +150,10 @@ int main()
 
         // Dibujar todo en la ventana
         window.clear();
-        window.draw(street);
+        window.draw(road);
+        window.draw(leftLane);
+        window.draw(rightLane);
+        window.draw(line);
         window.draw(fuelText);
         window.draw(speedText);
         window.draw(instructionsText);

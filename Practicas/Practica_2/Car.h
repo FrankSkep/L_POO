@@ -37,6 +37,7 @@ public:
         textureBrake.loadFromFile("assets/freno.png");
         sprite.setTexture(textureOff); // Por defecto el carro está apagado
         sprite.setPosition(position);
+        sprite.setScale(1.2, 1.2);
     }
 
     void TurnOn()
@@ -53,8 +54,8 @@ public:
     {
         if (isOn && fuel > 0)
         {
-            speed += 500 * deltaTime; // Incrementa la velocidad
-            fuel -= 35 * deltaTime;    // Decrementa gasolina
+            speed += 850 * deltaTime; // Incrementa la velocidad
+            fuel -= 35 * deltaTime;   // Decrementa gasolina
         }
     }
 
@@ -64,7 +65,7 @@ public:
         {
             if (speed > 0)
             {
-                speed = std::max(0.0f, speed - 250 * deltaTime);
+                speed = std::max(0.0f, speed - 1500 * deltaTime);
                 sprite.setTexture(textureBrake);
             }
         }
