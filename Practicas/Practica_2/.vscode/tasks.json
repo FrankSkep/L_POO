@@ -1,0 +1,30 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "cppbuild",
+			"label": "Compilacion SFML",
+			"command": "C:\\mingw64\\bin\\g++.exe",
+			"args": [
+				"-o", "app",
+                "main.cpp",
+                "-IC:/SFML/include",
+                "-LC:/SFML/lib",
+                "-lsfml-graphics",
+                "-lsfml-window",
+                "-lsfml-system",
+                "-O2",
+                "-march=native",
+                "-flto"
+			],
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": "build",
+			"detail": "compilador: C:\\mingw64\\bin\\g++.exe"
+		}
+	]
+}
