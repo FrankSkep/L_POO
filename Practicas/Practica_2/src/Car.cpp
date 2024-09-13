@@ -15,11 +15,11 @@ Car::Car(sf::Vector2f position, sf::Vector2f direction, float angle, float speed
     this->isTurningRight = false;
 
     // Cargar texturas
-    textureOff.loadFromFile("../assets/apagado.png");
-    textureOn.loadFromFile("../assets/encendido.png");
-    textureLeft.loadFromFile("../assets/giro_izquierda.png");
-    textureRight.loadFromFile("../assets/giro_derecha.png");
-    textureBrake.loadFromFile("../assets/freno.png");
+    textureOff.loadFromFile("assets/apagado.png");
+    textureOn.loadFromFile("assets/encendido.png");
+    textureLeft.loadFromFile("assets/giro_izquierda.png");
+    textureRight.loadFromFile("assets/giro_derecha.png");
+    textureBrake.loadFromFile("assets/freno.png");
     spriteCar.setTexture(textureOff); // Por defecto el carro esta apagado
     spriteCar.setPosition(position);
     spriteCar.setScale(1.2, 1.2); // Tamaño del carro
