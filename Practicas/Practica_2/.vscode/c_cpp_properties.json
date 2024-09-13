@@ -4,9 +4,7 @@
             "name": "Win64",
             "includePath": [
                 "${workspaceFolder}/**",
-                "C:\\SFML\\include",
-                "C:\\SFML\\lib",
-                "C:\\SFML\\bin"
+                "C:\\SFML\\include"
             ],
             "defines": [
                 "_DEBUG",

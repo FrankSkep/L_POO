@@ -8,6 +8,8 @@
 			"args": [
 				"-o", "app",
                 "main.cpp",
+				"src/Car.cpp",
+				"src/Gui.cpp",
                 "-IC:/SFML/include",
                 "-LC:/SFML/lib",
                 "-lsfml-graphics",
