@@ -49,7 +49,11 @@ public:
     {
         isOn = false;
         spriteCar.setTexture(textureOff);
+        direction = sf::Vector2f(0, -1);
+        speed = 0;
+        angle = 0;
     }
+
     void Accelerate(float deltaTime)
     {
         if (isOn && fuel > 0)
