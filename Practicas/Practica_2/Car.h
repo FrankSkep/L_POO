@@ -107,14 +107,8 @@ public:
             position += direction * speed * deltaTime;
 
             // Verificar límites de la ventana
-            if (position.x < 0)
-                position.x = 0;
-            if (position.y < 0)
-                position.y = 0;
-            if (position.x + spriteCar.getGlobalBounds().width > window.getSize().x)
-                position.x = window.getSize().x - spriteCar.getGlobalBounds().width;
-            if (position.y + spriteCar.getGlobalBounds().height > window.getSize().y)
-                position.y = window.getSize().y - spriteCar.getGlobalBounds().height;
+            position.x = std::max(0.0f, std::min((float)window.getSize().x, position.x));
+            position.y = std::max(0.0f, std::min((float)window.getSize().y, position.y));
 
             spriteCar.setPosition(position);
         }
