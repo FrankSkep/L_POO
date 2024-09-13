@@ -18,45 +18,45 @@ int main()
         return -1;
     }
 
-    // Crear la calle (simple rectángulo gris)
+    // Dibujar la calle (simple rectángulo gris)
     sf::RectangleShape road(sf::Vector2f(SCR_WIDTH, SCR_HEIGHT));
     road.setFillColor(sf::Color(50, 50, 50)); // Color gris para la calle
     road.setPosition(0, 0);
 
-    // Crear los carriles (más claros)
+    // Dibujar carriles
     sf::RectangleShape leftLane(sf::Vector2f(SCR_WIDTH / 3 - 10, SCR_HEIGHT));
-    leftLane.setFillColor(sf::Color(100, 100, 100));                   // Color gris claro para los carriles
-    leftLane.setPosition(SCR_WIDTH / 6 - leftLane.getSize().x / 2, 0); // Carril izquierdo
+    leftLane.setFillColor(sf::Color(100, 100, 100));
+    leftLane.setPosition(SCR_WIDTH / 6 - leftLane.getSize().x / 2, 0);
 
     sf::RectangleShape rightLane(sf::Vector2f(SCR_WIDTH / 3 - 10, SCR_HEIGHT));
-    rightLane.setFillColor(sf::Color(100, 100, 100));                        // Color gris claro para los carriles
-    rightLane.setPosition(SCR_WIDTH * 5 / 6 - rightLane.getSize().x / 2, 0); // Carril derecho
+    rightLane.setFillColor(sf::Color(100, 100, 100));
+    rightLane.setPosition(SCR_WIDTH * 5 / 6 - rightLane.getSize().x / 2, 0);
 
-    // Crear las líneas centrales de la calle (blancas)
+    // Lineas centrales de la calle
     sf::RectangleShape line(sf::Vector2f(10, SCR_HEIGHT));
     line.setFillColor(sf::Color::White);
     line.setPosition(SCR_WIDTH / 2 - 5, 0);
 
-    // Crear el texto para mostrar la cantidad de gasolina
+    // texto para mostrar la cantidad de gasolina
     sf::Text fuelText;
-    fuelText.setFont(font);                  // Asignar la fuente
-    fuelText.setCharacterSize(26);           // Tamaño del texto
-    fuelText.setFillColor(sf::Color::White); // Color del texto
-    fuelText.setPosition(10, 10);            // Posición del texto en la pantalla
+    fuelText.setFont(font);
+    fuelText.setCharacterSize(26);
+    fuelText.setFillColor(sf::Color::White);
+    fuelText.setPosition(10, 10);
 
-    // Crear el texto para mostrar la velocidad actual
+    // texto para mostrar la velocidad actual
     sf::Text speedText;
-    speedText.setFont(font);                  // Asignar la fuente
-    speedText.setCharacterSize(26);           // Tamaño del texto
-    speedText.setFillColor(sf::Color::White); // Color del texto
-    speedText.setPosition(10, 50);            // Posición del texto en la pantalla
+    speedText.setFont(font);
+    speedText.setCharacterSize(26);
+    speedText.setFillColor(sf::Color::White);
+    speedText.setPosition(10, 50);
 
-    // Crear el texto para mostrar las instrucciones de las teclas
+    // texto para mostrar las instrucciones de las teclas
     sf::Text instructionsText;
-    instructionsText.setFont(font);                     // Asignar la fuente
-    instructionsText.setCharacterSize(26);              // Tamaño del texto
-    instructionsText.setFillColor(sf::Color::White);    // Color del texto
-    instructionsText.setPosition(10, SCR_HEIGHT - 200); // Posición del texto en la pantalla
+    instructionsText.setFont(font);
+    instructionsText.setCharacterSize(26);
+    instructionsText.setFillColor(sf::Color::White);
+    instructionsText.setPosition(10, SCR_HEIGHT - 200);
     instructionsText.setString("E: Encender\nA: Apagar\nUp: Acelerar\nDown: Frenar\nLeft: Izquierda\nRight: Derecha");
 
     // Reloj para calcular deltaTime
