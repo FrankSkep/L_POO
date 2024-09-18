@@ -73,26 +73,37 @@ void Car::Brake(float deltaTime)
         if (speed > 0)
         {
             speed = std::max(0.0f, speed - 1500 * deltaTime);
-            spriteCar.setTexture(textureBrake);
+            isBraking = true;
         }
     }
+}
+
+void Car::StopBraking()
+{
+    isBraking = false;
 }
 
 // Girar
 void Car::TurnLeft(float deltaTime)
 {
-    if (speed > 0)
+    if (isOn)
     {
-        direction = Rotar(direction, -100 * deltaTime);
-        spriteCar.setTexture(textureLeft);
+        if (speed > 0)
+        {
+            direction = Rotar(direction, -100 * deltaTime);
+            isTurningLeft = true;
+        }
     }
 }
 void Car::TurnRight(float deltaTime)
 {
-    if (speed > 0)
+    if (isOn)
     {
-        direction = Rotar(direction, 100 * deltaTime);
-        spriteCar.setTexture(textureRight);
+        if (speed > 0)
+        {
+            direction = Rotar(direction, 100 * deltaTime);
+            isTurningRight = true;
+        }
     }
 }
 
@@ -121,7 +132,31 @@ void Car::Update(float deltaTime, sf::RenderWindow &window)
         position.x = std::max(0.0f, std::min((float)window.getSize().x, position.x));
         position.y = std::max(0.0f, std::min((float)window.getSize().y, position.y));
     }
+
+    // Actualizar la textura del carro
+    if (isBraking)
+    {
+        spriteCar.setTexture(textureBrake);
+    }
+    else if (isTurningLeft)
+    {
+        spriteCar.setTexture(textureLeft);
+    }
+    else if (isTurningRight)
+    {
+        spriteCar.setTexture(textureRight);
+    }
+    else if (isOn)
+    {
+        spriteCar.setTexture(textureOn);
+    }
+    else
+    {
+        spriteCar.setTexture(textureOff);
+    }
+
     spriteCar.setPosition(position); // Actualiza la posición del sprite
+    Display(window);
 }
 
 // Dibujar el carro en la ventana

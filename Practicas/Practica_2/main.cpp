@@ -47,10 +47,17 @@ int main()
             {
                 car.Accelerate(dt);
             }
-            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+            
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
             {
                 car.Brake(dt);
             }
+            else
+            {
+                std::cout << "No brake" << std::endl;
+                car.StopBraking();
+            }
+
 
             // Giro del carro
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
@@ -83,17 +90,17 @@ int main()
             }
         }
 
-        // Actualizar la posicion del carro
-        car.Update(dt, window);
-
         // Limpiar la ventanas
         window.clear();
 
         // Dibujar interfaz (calle, marcadores, etc.)
         gui.Draw(window, car.getFuel(), car.getSpeed(), FUEL_MAX);
 
-        // Dibujar el carro
-        car.Display(window);
+        // Actualizar la posicion del carro
+        car.Update(dt, window);
+
+        // // Dibujar el carro
+        // car.Display(window);
 
         // Mostrar lo que se ha dibujado
         window.display();

@@ -12,6 +12,7 @@ private:
     bool isOn;
     bool isTurningLeft;
     bool isTurningRight;
+    bool isBraking;
     sf::Sprite spriteCar;
     sf::Texture textureOff, textureOn, textureLeft, textureRight, textureBrake;
 
@@ -32,6 +33,7 @@ public:
 
     // Frenar
     void Brake(float deltaTime);
+    void StopBraking();
 
     // Girar
     void TurnLeft(float deltaTime);
