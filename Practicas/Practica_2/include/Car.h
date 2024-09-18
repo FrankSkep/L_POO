@@ -7,7 +7,6 @@ class Car
 private:
     sf::Vector2f position;
     sf::Vector2f direction;
-    float angle;
     float speed;
     float fuel;
     bool isOn;
@@ -17,7 +16,7 @@ private:
     sf::Texture textureOff, textureOn, textureLeft, textureRight, textureBrake;
 
 public:
-    Car(sf::Vector2f position, sf::Vector2f direction, float angle, float speed, float fuel);
+    Car(sf::Vector2f position, sf::Vector2f direction, float speed, float fuel);
 
     // Encender el carro
     void TurnOn();

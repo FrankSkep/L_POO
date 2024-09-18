@@ -16,7 +16,7 @@ int main()
     Gui gui(SCR_WIDTH, SCR_HEIGHT);
 
     // Objeto Car
-    Car car(sf::Vector2f(SCR_WIDTH / 2 - 32, SCR_HEIGHT - 150), sf::Vector2f(0, -1), 0, 0, FUEL_MAX);
+    Car car(sf::Vector2f(SCR_WIDTH / 2 - 32, SCR_HEIGHT - 150), sf::Vector2f(0, -1), 0, FUEL_MAX);
 
     // Bucle principal del juego
     while (window.isOpen())
@@ -47,7 +47,7 @@ int main()
             {
                 car.Accelerate(dt);
             }
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
             {
                 car.Brake(dt);
             }
@@ -57,9 +57,13 @@ int main()
             {
                 car.TurnRight(dt);
             }
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
             {
                 car.TurnLeft(dt);
+            }
+            else
+            {
+                car.StopTurning();
             }
 
             // Llenar tanque de gasolina

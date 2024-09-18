@@ -1,11 +1,10 @@
 #include "../include/Car.h"
 
-Car::Car(sf::Vector2f position, sf::Vector2f direction, float angle, float speed, float fuel)
+Car::Car(sf::Vector2f position, sf::Vector2f direction, float speed, float fuel)
 {
     // Inicializar atributos
     this->position = position;
     this->direction = direction;
-    this->angle = angle;
     this->speed = speed;
     this->fuel = fuel;
 
@@ -41,7 +40,6 @@ void Car::TurnOff()
     // Reinicia la dirección y velocidad al apagar
     direction = sf::Vector2f(0, -1);
     speed = 0;
-    angle = 0;
 }
 
 // Reiniciar el juego
@@ -49,7 +47,6 @@ void Car::reinit(float screenWidth, float screenHeight, float fuelInicial)
 {
     position = sf::Vector2f(screenWidth / 2 - 32, screenHeight - 150);
     direction = sf::Vector2f(0, -1);
-    angle = 0;
     speed = 0;
     fuel = fuelInicial;
     isOn = false;
@@ -86,7 +83,6 @@ void Car::TurnLeft(float deltaTime)
 {
     if (speed > 0)
     {
-        angle -= 250 * deltaTime; // Reduce el giro
         direction = Rotar(direction, -100 * deltaTime);
         spriteCar.setTexture(textureLeft);
     }
@@ -95,7 +91,6 @@ void Car::TurnRight(float deltaTime)
 {
     if (speed > 0)
     {
-        angle += 250 * deltaTime; // Incrementa el giro
         direction = Rotar(direction, 100 * deltaTime);
         spriteCar.setTexture(textureRight);
     }
@@ -104,8 +99,9 @@ void Car::TurnRight(float deltaTime)
 // Detener el giro
 void Car::StopTurning()
 {
-    if ((isTurningLeft || isTurningRight) && speed > 0)
+    if (direction.x != 0) // si el carro esta girando
     {
+        direction = sf::Vector2f(0, -1);
         spriteCar.setTexture(textureOn);
         isTurningLeft = isTurningRight = false;
     }
@@ -125,7 +121,7 @@ void Car::Update(float deltaTime, sf::RenderWindow &window)
         position.x = std::max(0.0f, std::min((float)window.getSize().x, position.x));
         position.y = std::max(0.0f, std::min((float)window.getSize().y, position.y));
     }
-    spriteCar.setPosition(position);
+    spriteCar.setPosition(position); // Actualiza la posición del sprite
 }
 
 // Dibujar el carro en la ventana
