@@ -18,9 +18,6 @@ private:
     sf::RectangleShape line;
 
 public:
-    // Constructor
     Gui(float screenWidth, float screenHeight);
-
-    // Dibujar todos los elementos de la interfaz
     void Draw(sf::RenderWindow &window, float fuel, float speed, float FUEL_MAX);
 };
