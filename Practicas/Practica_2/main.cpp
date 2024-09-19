@@ -42,19 +42,19 @@ int main()
                 car.TurnOff();
             }
 
-            // Acelerar / frenar
+            // Acelerar
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
             {
                 car.Accelerate(dt);
             }
             
+            // Frenar
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
             {
                 car.Brake(dt);
             }
             else
             {
-                std::cout << "No brake" << std::endl;
                 car.StopBraking();
             }
 

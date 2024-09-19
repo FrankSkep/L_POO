@@ -29,7 +29,7 @@ public:
     void StopTurning();
     void PumpGas(float amount);
     void Update(float deltaTime, sf::RenderWindow &window);
-    void Display(sf::RenderWindow &window);
+    void Draw(sf::RenderWindow &window);
     sf::Vector2f Rotar(sf::Vector2f v, float deg);
     float getFuel();
     float getSpeed();
