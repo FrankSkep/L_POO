@@ -25,7 +25,7 @@ Gui::Gui(float screenWidth, float screenHeight)
     controlesText.setFont(font);
     controlesText.setCharacterSize(24);
     controlesText.setFillColor(sf::Color::Yellow);
-    controlesText.setPosition(20, screenHeight - 200);
+    controlesText.setPosition(20, screenHeight - 265);
     controlesText.setString("E: Encender\nA: Apagar\nUp: Acelerar\nDown: Frenar\nLeft: Izquierda\nRight: Derecha\nF: Llenar tanque de gasolina\nR: Reiniciar juego\nQ: Salir");
 
     // Fondo
