@@ -1,12 +1,17 @@
-#pragma once
+#ifndef GUI_H
+#define GUI_H
+
 #include <SFML/Graphics.hpp>
-#include <string>  // para std::to_string
-#include <iomanip> // para setPrecision
-#include <sstream> // para ostringstream
 #include <iostream>
+#include <iomanip>
+#include <sstream>
 
 class Gui
 {
+public:
+    Gui(float screenWidth, float screenHeight);
+    void Draw(sf::RenderWindow &window, float fuel, float speed, float FUEL_MAX);
+
 private:
     sf::Font font;
     sf::Text fuelText;
@@ -16,8 +21,7 @@ private:
     sf::RectangleShape leftLane;
     sf::RectangleShape rightLane;
     sf::RectangleShape line;
-
-public:
-    Gui(float screenWidth, float screenHeight);
-    void Draw(sf::RenderWindow &window, float fuel, float speed, float FUEL_MAX);
+    sf::RectangleShape fuelIndicator;
 };
+
+#endif
