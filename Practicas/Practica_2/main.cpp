@@ -89,16 +89,15 @@ int main()
             }
         }
 
-        // Limpiar la ventanas
         window.clear();
 
-        // Dibujar interfaz (calle, marcadores, etc.)
+        // Dibujar interfaz
         gui.Draw(window, car.getFuel(), car.getSpeed(), FUEL_MAX);
 
-        // Dibujar y actualizar posicion del carro
+        // Dibujar y actualizar carro
         car.Update(dt, window);
 
-        window.display();
+        window.display(); // Mostrar la ventana
     }
     return 0;
 }
