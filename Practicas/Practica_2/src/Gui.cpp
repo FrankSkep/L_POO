@@ -28,12 +28,12 @@ Gui::Gui(float screenWidth, float screenHeight)
     controlesText.setPosition(20, screenHeight - 200);
     controlesText.setString("E: Encender\nA: Apagar\nUp: Acelerar\nDown: Frenar\nLeft: Izquierda\nRight: Derecha\nF: Llenar tanque de gasolina\nR: Reiniciar juego\nQ: Salir");
 
-    // Fondo degradado
+    // Fondo
     road = sf::RectangleShape(sf::Vector2f(screenWidth, screenHeight));
     road.setFillColor(sf::Color(50, 50, 50));
     road.setPosition(0, 0);
 
-    // Carriles (Izquierdo y derecho) con bordes
+    // Carriles (Izquierdo y derecho)
     leftLane = sf::RectangleShape(sf::Vector2f(screenWidth / 3 - 10, screenHeight));
     leftLane.setFillColor(sf::Color(100, 100, 100));
     leftLane.setOutlineThickness(5);
@@ -46,12 +46,12 @@ Gui::Gui(float screenWidth, float screenHeight)
     rightLane.setOutlineColor(sf::Color::White);
     rightLane.setPosition(screenWidth * 5 / 6 - rightLane.getSize().x / 2, 0);
 
-    // Líneas centrales de la calle
+    // Linea central de la calle
     line = sf::RectangleShape(sf::Vector2f(10, screenHeight));
     line.setFillColor(sf::Color::White);
     line.setPosition(screenWidth / 2 - 5, 0);
 
-    // Indicador de nivel de gasolina
+    // Barra indicadora de nivel de gasolina
     fuelIndicator = sf::RectangleShape(sf::Vector2f(200, 20));
     fuelIndicator.setFillColor(sf::Color::Green);
     fuelIndicator.setPosition(20, 100);
@@ -87,7 +87,7 @@ void Gui::Draw(sf::RenderWindow &window, float fuel, float speed, float FUEL_MAX
         fuelIndicator.setFillColor(sf::Color::Black);
     }
 
-    // Actualizar el tamaño del indicador de gasolina
+    // Actualiza tamaño de la barra indicadora de gasolina
     fuelIndicator.setSize(sf::Vector2f(200 * (fuel / FUEL_MAX), 20));
 
     window.draw(road);

@@ -1,28 +1,35 @@
 #include "../include/Car.h"
 
+// Constantes
+const float ACCELERATION_RATE = 800.0f;
+const float FUEL_CONSUMPTION_RATE = 35.0f;
+const float BRAKE_DECELERATION_RATE = 1500.0f;
+const float TURN_ANGLE = 100.0f;
+const float MAX_FUEL = 100.0f;
+
 // Constructor
 Car::Car(sf::Vector2f position, sf::Vector2f direction, float speed, float fuel)
 {
-    // Inicializar atributos
+    // Inicializacion atributos
     this->position = position;
     this->direction = direction;
     this->speed = speed;
     this->fuel = fuel;
 
-    // Inicializar variables de estado
+    // Inicializacion variables de estado
     this->isOn = false;
     this->isTurningLeft = false;
     this->isTurningRight = false;
 
-    // Cargar texturas
+    // Carga de texturas
     textureOff.loadFromFile("assets/apagado.png");
     textureOn.loadFromFile("assets/encendido.png");
     textureLeft.loadFromFile("assets/giro_izquierda.png");
     textureRight.loadFromFile("assets/giro_derecha.png");
     textureBrake.loadFromFile("assets/freno.png");
-    spriteCar.setTexture(textureOff); // Por defecto el carro esta apagado
+    spriteCar.setTexture(textureOff);
     spriteCar.setPosition(position);
-    spriteCar.setScale(1.2, 1.2); // Tamaño del carro
+    spriteCar.setScale(1.2, 1.2);
 }
 
 // Encender el carro
@@ -35,8 +42,6 @@ void Car::TurnOn()
 void Car::TurnOff()
 {
     isOn = false;
-
-    // Reinicia la dirección y velocidad al apagar
     direction = sf::Vector2f(0, -1);
     speed = 0;
 }
@@ -51,7 +56,6 @@ void Car::reinit(float screenWidth, float screenHeight, float fuelInicial)
     isOn = false;
     isTurningLeft = false;
     isTurningRight = false;
-    spriteCar.setTexture(textureOff);
 }
 
 // Acelerar
@@ -59,21 +63,18 @@ void Car::Accelerate(float deltaTime)
 {
     if (isOn && fuel > 0)
     {
-        speed += 800 * deltaTime; // Incrementa la velocidad
-        fuel -= 35 * deltaTime;   // Decrementa gasolina
+        speed += ACCELERATION_RATE * deltaTime;
+        fuel -= FUEL_CONSUMPTION_RATE * deltaTime;
     }
 }
 
 // Frenar
 void Car::Brake(float deltaTime)
 {
-    if (isOn)
+    if (isOn && speed > 0)
     {
-        if (speed > 0)
-        {
-            speed = std::max(0.0f, speed - 1500 * deltaTime);
-            isBraking = true;
-        }
+        speed = std::max(0.0f, speed - BRAKE_DECELERATION_RATE * deltaTime);
+        isBraking = true;
     }
 }
 
@@ -86,31 +87,27 @@ void Car::StopBraking()
 // Giro
 void Car::TurnLeft(float deltaTime)
 {
-    if (isOn)
+    if (isOn && speed > 0)
     {
-        if (speed > 0)
-        {
-            direction = Rotar(direction, -100 * deltaTime);
-            isTurningLeft = true;
-        }
+        direction = Rotar(direction, -TURN_ANGLE * deltaTime);
+        isTurningLeft = true;
+        isTurningRight = false;
     }
 }
 void Car::TurnRight(float deltaTime)
 {
-    if (isOn)
+    if (isOn && speed > 0)
     {
-        if (speed > 0)
-        {
-            direction = Rotar(direction, 100 * deltaTime);
-            isTurningRight = true;
-        }
+        direction = Rotar(direction, TURN_ANGLE * deltaTime);
+        isTurningRight = true;
+        isTurningLeft = false;
     }
 }
 
 // Detener el giro
 void Car::StopTurning()
 {
-    if (direction.x != 0) // si el carro esta girando
+    if (isTurningLeft || isTurningRight)
     {
         direction = sf::Vector2f(0, -1);
         isTurningLeft = isTurningRight = false;
@@ -118,7 +115,10 @@ void Car::StopTurning()
 }
 
 // Rellenar el tanque de gasolina
-void Car::PumpGas(float amount) { fuel = std::min(100.0f, fuel + amount); }
+void Car::PumpGas(float amount)
+{
+    fuel = std::min(100.0f, fuel + amount);
+}
 
 // Actualizar posición y textura del carro
 void Car::Update(float deltaTime, sf::RenderWindow &window)

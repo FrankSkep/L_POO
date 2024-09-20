@@ -1,4 +1,6 @@
-#pragma once
+#ifndef CAR_H
+#define CAR_H
+
 #include <SFML/Graphics.hpp>
 #include <cmath>
 
@@ -34,3 +36,5 @@ public:
     float getFuel();
     float getSpeed();
 };
+
+#endif

@@ -6,7 +6,7 @@
 
 int main()
 {
-    // Crear ventana
+    // Creacion de la ventana
     sf::RenderWindow window(sf::VideoMode(SCR_WIDTH, SCR_HEIGHT), "P2 LPOO - Car");
 
     // Reloj para calcular deltaTime
@@ -47,7 +47,7 @@ int main()
             {
                 car.Accelerate(dt);
             }
-            
+
             // Frenar
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
             {
@@ -57,7 +57,6 @@ int main()
             {
                 car.StopBraking();
             }
-
 
             // Giro del carro
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
@@ -96,13 +95,9 @@ int main()
         // Dibujar interfaz (calle, marcadores, etc.)
         gui.Draw(window, car.getFuel(), car.getSpeed(), FUEL_MAX);
 
-        // Actualizar la posicion del carro
+        // Dibujar y actualizar posicion del carro
         car.Update(dt, window);
 
-        // // Dibujar el carro
-        // car.Display(window);
-
-        // Mostrar lo que se ha dibujado
         window.display();
     }
     return 0;
