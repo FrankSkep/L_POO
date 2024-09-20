@@ -1,5 +1,6 @@
 #include "../include/Car.h"
 
+// Constructor
 Car::Car(sf::Vector2f position, sf::Vector2f direction, float speed, float fuel)
 {
     // Inicializar atributos
@@ -28,14 +29,12 @@ Car::Car(sf::Vector2f position, sf::Vector2f direction, float speed, float fuel)
 void Car::TurnOn()
 {
     isOn = true;
-    spriteCar.setTexture(textureOn);
 }
 
 // Apagar el carro
 void Car::TurnOff()
 {
     isOn = false;
-    spriteCar.setTexture(textureOff);
 
     // Reinicia la dirección y velocidad al apagar
     direction = sf::Vector2f(0, -1);
@@ -55,7 +54,7 @@ void Car::reinit(float screenWidth, float screenHeight, float fuelInicial)
     spriteCar.setTexture(textureOff);
 }
 
-// Acelerar y frenar
+// Acelerar
 void Car::Accelerate(float deltaTime)
 {
     if (isOn && fuel > 0)
@@ -78,12 +77,13 @@ void Car::Brake(float deltaTime)
     }
 }
 
+// Dejar de frenar
 void Car::StopBraking()
 {
     isBraking = false;
 }
 
-// Girar
+// Giro
 void Car::TurnLeft(float deltaTime)
 {
     if (isOn)
@@ -113,7 +113,6 @@ void Car::StopTurning()
     if (direction.x != 0) // si el carro esta girando
     {
         direction = sf::Vector2f(0, -1);
-        spriteCar.setTexture(textureOn);
         isTurningLeft = isTurningRight = false;
     }
 }
@@ -121,7 +120,7 @@ void Car::StopTurning()
 // Rellenar el tanque de gasolina
 void Car::PumpGas(float amount) { fuel = std::min(100.0f, fuel + amount); }
 
-// Actualizar la posición del carro
+// Actualizar posición y textura del carro
 void Car::Update(float deltaTime, sf::RenderWindow &window)
 {
     if (isOn && fuel > 0)
@@ -133,7 +132,6 @@ void Car::Update(float deltaTime, sf::RenderWindow &window)
         position.y = std::max(0.0f, std::min((float)window.getSize().y, position.y));
     }
 
-    // Actualizar la textura del carro
     if (isBraking)
     {
         spriteCar.setTexture(textureBrake);
@@ -155,12 +153,12 @@ void Car::Update(float deltaTime, sf::RenderWindow &window)
         spriteCar.setTexture(textureOff);
     }
 
-    spriteCar.setPosition(position); // Actualiza la posición del sprite
-    Display(window);
+    spriteCar.setPosition(position);
+    Draw(window);
 }
 
 // Dibujar el carro en la ventana
-void Car::Display(sf::RenderWindow &window)
+void Car::Draw(sf::RenderWindow &window)
 {
     window.draw(spriteCar);
 }

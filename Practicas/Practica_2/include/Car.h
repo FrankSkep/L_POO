@@ -1,6 +1,4 @@
-#ifndef CAR_H
-#define CAR_H
-
+#pragma once
 #include <SFML/Graphics.hpp>
 #include <cmath>
 
@@ -31,10 +29,8 @@ public:
     void StopTurning();
     void PumpGas(float amount);
     void Update(float deltaTime, sf::RenderWindow &window);
-    void Display(sf::RenderWindow &window);
+    void Draw(sf::RenderWindow &window);
     sf::Vector2f Rotar(sf::Vector2f v, float deg);
     float getFuel();
     float getSpeed();
 };
-
-#endif
