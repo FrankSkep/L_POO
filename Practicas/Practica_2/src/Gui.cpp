@@ -9,17 +9,22 @@ Gui::Gui(float screenWidth, float screenHeight)
         return;
     }
 
-    // Texto para mostrar la cantidad de gasolina
-    fuelText.setFont(font);
-    fuelText.setCharacterSize(30);
-    fuelText.setFillColor(sf::Color::White);
-    fuelText.setPosition(20, 20);
-
     // Texto para mostrar la velocidad actual
     speedText.setFont(font);
     speedText.setCharacterSize(30);
     speedText.setFillColor(sf::Color::White);
-    speedText.setPosition(20, 60);
+    speedText.setPosition(20, 20);
+
+    // Texto para mostrar la cantidad de gasolina
+    fuelText.setFont(font);
+    fuelText.setCharacterSize(30);
+    fuelText.setFillColor(sf::Color::White);
+    fuelText.setPosition(20, 65);
+
+    // Barra indicadora de nivel de gasolina
+    fuelIndicator = sf::RectangleShape(sf::Vector2f(200, 20));
+    fuelIndicator.setFillColor(sf::Color::Green);
+    fuelIndicator.setPosition(20, 105);
 
     // Texto para mostrar los controles
     controlesText.setFont(font);
@@ -50,11 +55,6 @@ Gui::Gui(float screenWidth, float screenHeight)
     line = sf::RectangleShape(sf::Vector2f(10, screenHeight));
     line.setFillColor(sf::Color::White);
     line.setPosition(screenWidth / 2 - 5, 0);
-
-    // Barra indicadora de nivel de gasolina
-    fuelIndicator = sf::RectangleShape(sf::Vector2f(200, 20));
-    fuelIndicator.setFillColor(sf::Color::Green);
-    fuelIndicator.setPosition(20, 100);
 }
 
 void Gui::Draw(sf::RenderWindow &window, float fuel, float speed, float FUEL_MAX)
