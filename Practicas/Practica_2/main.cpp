@@ -16,7 +16,7 @@ int main()
     Gui gui(SCR_WIDTH, SCR_HEIGHT);
 
     // Objeto Car
-    Car car(sf::Vector2f(SCR_WIDTH / 2 - 32, SCR_HEIGHT - 150), sf::Vector2f(0, -1), 0, FUEL_MAX);
+    Car car(sf::Vector2f(SCR_WIDTH / 2 - 32, SCR_HEIGHT - 80), sf::Vector2f(0, -1), 0, FUEL_MAX);
 
     // Bucle principal del juego
     while (window.isOpen())

@@ -30,6 +30,8 @@ Car::Car(sf::Vector2f position, sf::Vector2f direction, float speed, float fuel)
     spriteCar.setTexture(textureOff);
     spriteCar.setPosition(position);
     spriteCar.setScale(1.2, 1.2);
+    // Establece el origen del sprite en el centro
+    spriteCar.setOrigin(spriteCar.getLocalBounds().width / 2, spriteCar.getLocalBounds().height / 2);
 }
 
 // Encender el carro
@@ -56,6 +58,7 @@ void Car::reinit(float screenWidth, float screenHeight, float fuelInicial)
     isOn = false;
     isTurningLeft = false;
     isTurningRight = false;
+    spriteCar.setRotation(0);
 }
 
 // Acelerar
@@ -90,15 +93,18 @@ void Car::TurnLeft(float deltaTime)
     if (isOn && speed > 0)
     {
         direction = Rotar(direction, -TURN_ANGLE * deltaTime);
+        spriteCar.setRotation(spriteCar.getRotation() - TURN_ANGLE * deltaTime);
         isTurningLeft = true;
         isTurningRight = false;
     }
 }
+
 void Car::TurnRight(float deltaTime)
 {
     if (isOn && speed > 0)
     {
         direction = Rotar(direction, TURN_ANGLE * deltaTime);
+        spriteCar.setRotation(spriteCar.getRotation() + TURN_ANGLE * deltaTime);
         isTurningRight = true;
         isTurningLeft = false;
     }
@@ -107,11 +113,8 @@ void Car::TurnRight(float deltaTime)
 // Detener el giro
 void Car::StopTurning()
 {
-    if (isTurningLeft || isTurningRight)
-    {
-        direction = sf::Vector2f(0, -1);
-        isTurningLeft = isTurningRight = false;
-    }
+    isTurningLeft = false;
+    isTurningRight = false;
 }
 
 // Rellenar el tanque de gasolina
