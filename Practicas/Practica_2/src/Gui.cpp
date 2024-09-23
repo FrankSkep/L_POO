@@ -2,12 +2,16 @@
 
 Gui::Gui(float screenWidth, float screenHeight)
 {
-    // Cargar la fuente
-    if (!font.loadFromFile("assets/Roboto-Regular.ttf"))
+    // Cargar fuente
+    try
     {
-        std::cout << "Error al cargar la fuente" << std::endl;
-        return;
+        font.loadFromFile("assets/Roboto-Regular.ttf");
     }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+    
 
     // Texto para mostrar la velocidad actual
     speedText.setFont(font);
