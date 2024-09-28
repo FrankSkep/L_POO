@@ -3,7 +3,7 @@
 
 int main()
 {
-    Fraccion f1("2/3");
+    Fraccion f1(2, 3);
     Fraccion f2("1/4");
     f2 = "2/4";
 
