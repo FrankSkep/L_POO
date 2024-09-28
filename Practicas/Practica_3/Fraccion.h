@@ -15,15 +15,18 @@ public:
     Fraccion(int numerador, int denominador);
     Fraccion(const std::string &fraccionStr);
 
+    // Operaciones aritméticas
     Fraccion operator+(Fraccion &f) const;
-    friend std::ostream& operator<<(std::ostream &out, const Fraccion &f);
+    Fraccion operator-(Fraccion &f) const;
+    Fraccion operator*(Fraccion &f) const;
+    Fraccion operator/(Fraccion &f) const;
+
+    Fraccion operator=(const std::string &f_str);
+
+    void convertirFraccion(const std::string& f_str);
+    friend std::ostream &operator<<(std::ostream &out, const Fraccion &f);
 
     std::string toString() const;
-
-    void setNumerador(int numerador);
-    int getNumerador();
-    void setDenominador(int denominador);
-    int getDenominador();
 };
 
 #endif

@@ -3,11 +3,26 @@
 
 int main()
 {
-    Fraccion f1("1/3");
-    Fraccion f2("1/3");
+    Fraccion f1("2/3");
+    Fraccion f2("1/4");
+    f2 = "2/4";
 
-    Fraccion resultado = f1 + f2;
-    std::cout << "Resultado: " << resultado << std::endl;
+    Fraccion suma = f1 + f2;
+    Fraccion resta = f1 - f2;
+    Fraccion multi = f1 * f2;
+    Fraccion div = f1 / f2;
 
-    std::cout<<"Impresion de entero con fraccion: " << Fraccion("8/3") << std::endl;
+    std::cout << "* Resultados *" << std::endl;
+    std::cout << "Suma: " << suma << std::endl;
+    std::cout << "Resta: " << resta << std::endl;
+    std::cout << "Multiplicacion: " << multi << std::endl;
+    std::cout << "Division: " << div << std::endl;
+    /*
+    Salida:
+    * Resultados *
+    Suma: 1 2/12
+    Resta: 2/12
+    Multiplicacion: 4/12
+    Division: 1 2/6
+    */
 }
