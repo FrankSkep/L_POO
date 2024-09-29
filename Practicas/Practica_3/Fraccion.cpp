@@ -1,4 +1,5 @@
 #include "Fraccion.h"
+#include <cctype>
 
 // Constructor 1 (Recibe miembros individuales)
 Fraccion::Fraccion(int numerador, int denominador)
@@ -14,9 +15,9 @@ Fraccion::Fraccion(int numerador, int denominador)
 // Constructor 2 (Recibe fraccion como string)
 Fraccion::Fraccion(const std::string &fraccionStr)
 {
-    if (validarStrFraccion(fraccionStr))
+    if (esFraccionValida(fraccionStr))
     {
-        convertirFraccion(fraccionStr);
+        strToFraccion(fraccionStr);
         if (denominador == 0)
         {
             throw std::invalid_argument("El denominador no puede ser cero.");
@@ -99,7 +100,7 @@ Fraccion Fraccion::operator/(int entero) const
 // Sobrecarga '=' para asignar fraccion mediante string
 Fraccion Fraccion::operator=(const std::string &f_str)
 {
-    convertirFraccion(f_str);
+    strToFraccion(f_str);
     return (*this);
 }
 
@@ -130,21 +131,14 @@ std::ostream &operator<<(std::ostream &out, const Fraccion &f)
     return out;
 }
 
-std::string Fraccion::toString() const
-{
-    std::ostringstream out;
-    out << numerador << "/" << denominador;
-    return out.str();
-}
-
-void Fraccion::convertirFraccion(const std::string &f_str)
+void Fraccion::strToFraccion(const std::string &f_str)
 {
     std::istringstream iss(f_str);
     char slash;
     iss >> numerador >> slash >> denominador;
 }
 
-bool validarStrFraccion(const std::string &str)
+bool esFraccionValida(const std::string &str)
 {
     std::string temp;
 
