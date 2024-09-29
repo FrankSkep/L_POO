@@ -1,7 +1,7 @@
 #include "Fraccion.h"
 #include <cctype>
 
-// Constructor 1 (Recibe miembros individuales)
+// Constructor 1 (Recibe numerador y denominador)
 Fraccion::Fraccion(int numerador, int denominador)
 {
     if (denominador == 0)

@@ -6,7 +6,7 @@ int main()
     try
     {
         Fraccion f1(3, 4);
-        Fraccion f2("2/4"); // Esto lanzará una excepción
+        Fraccion f2("2/4");
 
         Fraccion f3 = f1 + f2;
         std::cout << f1 << " + " << f2 << " = " << f3 << std::endl; // Imprime 3/4 + 2/4 = 1 1/4
@@ -33,4 +33,13 @@ int main()
     {
         std::cerr << "Error: " << e.what() << std::endl;
     }
+
+    /* Salidas del codigo:
+    3/4 + 2/4 = 1 1/4
+    1/2 * 2/4 = 2/8
+    1/2 * 5 = 2 1/2
+    Suma: 1
+    Resta: 0
+    Multiplicacion: 2/8
+    Division: 1  */
 }

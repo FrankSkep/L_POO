@@ -1,0 +1,3 @@
+# Ignorar archivos sin extension
+*.
+*.exe
