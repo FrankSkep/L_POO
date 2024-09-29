@@ -10,22 +10,23 @@ public:
     int numerador;
     int denominador;
 
+    // Constructores
     Fraccion(int numerador, int denominador);
     Fraccion(const std::string &fraccionStr);
 
-    // Operaciones aritmeticas Fraccion con Fraccion
+    // Sobrecarga operadores aritmeticos (Fraccion con Fraccion)
     Fraccion operator+(Fraccion &f) const;
     Fraccion operator-(Fraccion &f) const;
     Fraccion operator*(Fraccion &f) const;
     Fraccion operator/(Fraccion &f) const;
 
-    // Operaciones aritmeticas con Fraccion con entero
+    // Sobrecarga operadores aritmeticos (Fraccion con Entero)
     Fraccion operator+(int entero) const;
     Fraccion operator-(int entero) const;
     Fraccion operator*(int entero) const;
     Fraccion operator/(int entero) const;
 
-    // Operador de asignacion
+    // Sobrecarga operador de asignacion
     Fraccion operator=(const std::string &f_str);
 
     // Funcion amiga para sobrecargar operador de flujo salida
