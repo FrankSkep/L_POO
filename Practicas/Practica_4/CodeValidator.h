@@ -13,10 +13,10 @@ using std::string;
 class CodeValidator
 {
 public:
-    void validate(const std::string &filename);
-    friend std::vector<std::string> ReadFile(std::string filename);
+    static void validate(const string &filename);
+    friend std::vector<string> ReadFile(string &filename);
 };
 
-std::vector<string> ReadFile(string filename);
+std::vector<string> ReadFile(const string &filename);
 
 #endif

@@ -2,65 +2,79 @@
 #include <stack>
 #include <fstream>
 
-void CodeValidator::validate(const std::string &filename)
+void CodeValidator::validate(const string &filename)
 {
-    std::vector<std::string> code = ReadFile(filename);
+    std::vector<string> contenido = ReadFile(filename); // Vector para almacenar las lineas del archivo
+    std::stack<char> delimiterStack;                    // Stack para almacenar los delimitadores
 
-    std::stack<char> stack;
-    int lineNumber = 0; // Contador de líneas
-
-    for (const auto &line : code)
+    for (int i = 0; i < contenido.size(); i++)
     {
-        lineNumber++; // Incrementar el número de línea por cada línea del archivo
-
-        for (auto c : line)
+        const std::string &line = contenido[i];
+        for (char c : line)
         {
-            if (c == '(' || c == '[' || c == '{')
+            switch (c)
             {
-                stack.push(c);
-            }
-            else if (c == ')' || c == ']' || c == '}')
-            {
-                if (stack.empty())
+            case '(':
+            case '[':
+            case '{':
+                delimiterStack.push(c);
+                break;
+            case ')':
+                if (delimiterStack.empty() || delimiterStack.top() != '(')
                 {
-                    // Aquí se muestra la línea cuando ocurre el error
-                    std::cout << "Error: '" << c << "' en la línea " << lineNumber << ": no se encontró el delimitador de apertura." << std::endl;
+                    std::cout << "Error en la linea " << i + 1 << ": Delimitador " << c << " no coincide" << std::endl;
                     return;
                 }
-                char top = stack.top();
-                stack.pop();
-                if ((c == ')' && top != '(') || (c == ']' && top != '[') || (c == '}' && top != '{'))
+                delimiterStack.pop();
+                break;
+            case ']':
+                if (delimiterStack.empty() || delimiterStack.top() != '[')
                 {
-                    // Aquí se muestra la línea cuando ocurre el error
-                    std::cout << "Error: '" << c << "' en la línea " << lineNumber << ": delimitador incorrecto." << std::endl;
+                    std::cout << "Error en la linea " << i + 1 << ": Delimitador " << c << " no coincide" << std::endl;
                     return;
                 }
+                delimiterStack.pop();
+                break;
+            case '}':
+                if (delimiterStack.empty() || delimiterStack.top() != '{')
+                {
+                    std::cout << "Error en la linea " << i + 1 << ": Delimitador " << c << " no coincide" << std::endl;
+                    return;
+                }
+                delimiterStack.pop();
+                break;
+            case '"':
+            case '\'':
+                if (!delimiterStack.empty() && delimiterStack.top() == c)
+                {
+                    delimiterStack.pop();
+                }
+                else
+                {
+                    delimiterStack.push(c);
+                }
+                break;
             }
         }
     }
-
-    // Si la pila no está vacía al final, significa que faltan delimitadores de cierre
-    if (!stack.empty())
+    if (!delimiterStack.empty())
     {
-        std::cout << "Error: faltan delimitadores de cierre en el archivo." << std::endl;
-        return;
+        std::cout << "Error: Delimitador " << delimiterStack.top() << " no coincide" << std::endl;
     }
-
-    std::cout << "Código válido" << std::endl;
+    else
+    {
+        std::cout << "Los delimitadores estan balanceados" << std::endl;
+    }
 }
 
-std::vector<string> ReadFile(string filename)
+std::vector<string> ReadFile(const string &filename)
 {
     std::vector<string> content;
     std::ifstream in(filename);
-    if (!in.is_open())
-        return content;
     string line;
-    while (!in.eof())
+    while (getline(in, line))
     {
-        std::getline(in, line);
         content.push_back(line);
     }
-    in.close();
     return content;
 }

@@ -3,7 +3,7 @@
 
 int main()
 {
-    CodeValidator validator;
-    validator.validate("test-code.cpp");
+    string filename = "test.cpp";
+    CodeValidator::validate(filename);
     return 0;
 }
