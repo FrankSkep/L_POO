@@ -4,12 +4,12 @@
 
 void CodeValidator::validate(const string &filename)
 {
-    std::vector<string> contenido = ReadFile(filename); // Vector para almacenar las lineas del archivo
-    std::stack<char> delimiterStack;                    // Stack para almacenar los delimitadores
+    std::vector<string> contenido = ReadFile(filename);
+    std::stack<char> delimiterStack;
 
     for (int i = 0; i < contenido.size(); i++)
     {
-        const std::string &line = contenido[i];
+        const string &line = contenido[i];
         for (char c : line)
         {
             switch (c)
@@ -22,7 +22,7 @@ void CodeValidator::validate(const string &filename)
             case ')':
                 if (delimiterStack.empty() || delimiterStack.top() != '(')
                 {
-                    std::cout << "Error en la linea " << i + 1 << ": Delimitador " << c << " no coincide" << std::endl;
+                    cout << "Error en la linea " << i + 1 << ": Delimitador " << c << " no coincide" << endl;
                     return;
                 }
                 delimiterStack.pop();
@@ -30,7 +30,7 @@ void CodeValidator::validate(const string &filename)
             case ']':
                 if (delimiterStack.empty() || delimiterStack.top() != '[')
                 {
-                    std::cout << "Error en la linea " << i + 1 << ": Delimitador " << c << " no coincide" << std::endl;
+                    cout << "Error en la linea " << i + 1 << ": Delimitador " << c << " no coincide" << endl;
                     return;
                 }
                 delimiterStack.pop();
@@ -38,7 +38,7 @@ void CodeValidator::validate(const string &filename)
             case '}':
                 if (delimiterStack.empty() || delimiterStack.top() != '{')
                 {
-                    std::cout << "Error en la linea " << i + 1 << ": Delimitador " << c << " no coincide" << std::endl;
+                    cout << "Error en la linea " << i + 1 << ": Delimitador " << c << " no coincide" << endl;
                     return;
                 }
                 delimiterStack.pop();
@@ -59,11 +59,11 @@ void CodeValidator::validate(const string &filename)
     }
     if (!delimiterStack.empty())
     {
-        std::cout << "Error: Delimitador " << delimiterStack.top() << " no coincide" << std::endl;
+        cout << "Error: Delimitador " << delimiterStack.top() << " no coincide" << endl;
     }
     else
     {
-        std::cout << "Los delimitadores estan balanceados" << std::endl;
+        cout << "Los delimitadores estan balanceados" << endl;
     }
 }
 
@@ -71,6 +71,12 @@ std::vector<string> ReadFile(const string &filename)
 {
     std::vector<string> content;
     std::ifstream in(filename);
+
+    if (!in.is_open())
+    {
+        throw std::invalid_argument("Error al leer el archivo, verifique que exista");
+    }
+
     string line;
     while (getline(in, line))
     {

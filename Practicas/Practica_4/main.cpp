@@ -1,9 +1,17 @@
-#include <iostream>
 #include "CodeValidator.h"
 
 int main()
 {
-    string filename = "test.cpp";
-    CodeValidator::validate(filename);
-    return 0;
+    string filename;
+    // cout << "Ingrese nombre del archivo (con extension): ";
+    // std::getline(cin, filename);
+    filename.assign("test.cpp");
+    try
+    {
+        CodeValidator::validate(filename);
+    }
+    catch (const std::invalid_argument &e)
+    {
+        std::cerr << e.what() << '\n';
+    }
 }
