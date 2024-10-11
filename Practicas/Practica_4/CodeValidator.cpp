@@ -15,8 +15,7 @@ void CodeValidator::validate(const string &filename)
 
     for (int i = 0; i < content.size(); i++)
     {
-        const string &line = content[i];
-        for (auto c : line)
+        for (char c : content[i])
         {
             // Si es un delimitador de apertura
             if (c == '(' || c == '[' || c == '{')
@@ -26,7 +25,6 @@ void CodeValidator::validate(const string &filename)
             // Si es un delimitador de cierre
             else if (delimiters.count(c))
             {
-                cout << "c: " << c << " [c]: " << delimiters[c] << endl;
                 if (delimiterStack.empty() || delimiterStack.top() != delimiters[c])
                 {
                     cout << "Error en la linea " << i + 1 << ": Delimitador " << c << " no coincide" << endl;
@@ -35,7 +33,7 @@ void CodeValidator::validate(const string &filename)
                 delimiterStack.pop();
             }
             // Si es una comilla simple o doble
-            else if (c == '"' || c == '\'')
+            else if (c == 39 || c == 34)
             {
                 if (!delimiterStack.empty() && delimiterStack.top() == c)
                 {

@@ -14,7 +14,6 @@ class CodeValidator
 {
 public:
     static void validate(const string &filename);
-    friend std::vector<string> ReadFile(string &filename);
 };
 
 std::vector<string> ReadFile(const string &filename);

@@ -1,11 +1,11 @@
 #include "CodeValidator.h"
 
+// compilation in vscode : g++ -o main main.cpp CodeValidator.cpp
 int main()
 {
-    string filename;
+    string filename = "testing-code.txt";
     // cout << "Ingrese nombre del archivo (con extension): ";
     // std::getline(cin, filename);
-    filename.assign("testing-code.txt");
     try
     {
         CodeValidator::validate(filename);
