@@ -5,7 +5,7 @@
 
 void CodeValidator::validate(const string &filename)
 {
-    std::vector<string> content = ReadFile(filename);
+    std::vector<string> fileLines = ReadFile(filename);
     std::stack<char> delimiterStack;
 
     std::unordered_map<char, char> delimiters = {
@@ -13,9 +13,9 @@ void CodeValidator::validate(const string &filename)
         {']', '['},
         {'}', '{'}};
 
-    for (int i = 0; i < content.size(); i++)
+    for (int i = 0; i < fileLines.size(); i++)
     {
-        for (char c : content[i])
+        for (char c : fileLines[i])
         {
             // Si es un delimitador de apertura
             if (c == '(' || c == '[' || c == '{')
