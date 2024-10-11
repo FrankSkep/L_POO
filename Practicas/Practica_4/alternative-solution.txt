@@ -1,0 +1,44 @@
+switch (c)
+{
+case '(':
+case '[':
+case '{':
+    delimiterStack.push(c);
+    break;
+
+case ')':
+    if (delimiterStack.empty() || delimiterStack.top() != '(')
+    {
+        cout << "Error en la linea " << i + 1 << ": Delimitador " << c << " no coincide" << endl;
+        return;
+    }
+    delimiterStack.pop();
+    break;
+case ']':
+    if (delimiterStack.empty() || delimiterStack.top() != '[')
+    {
+        cout << "Error en la linea " << i + 1 << ": Delimitador " << c << " no coincide" << endl;
+        return;
+    }
+    delimiterStack.pop();
+    break;
+case '}':
+    if (delimiterStack.empty() || delimiterStack.top() != '{')
+    {
+        cout << "Error en la linea " << i + 1 << ": Delimitador " << c << " no coincide" << endl;
+        return;
+    }
+    delimiterStack.pop();
+    break;
+case '"':
+case '\'':
+    if (!delimiterStack.empty() && delimiterStack.top() == c)
+    {
+        delimiterStack.pop();
+    }
+    else
+    {
+        delimiterStack.push(c);
+    }
+    break;
+}

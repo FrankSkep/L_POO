@@ -5,7 +5,7 @@ int main()
     string filename;
     // cout << "Ingrese nombre del archivo (con extension): ";
     // std::getline(cin, filename);
-    filename.assign("test.cpp");
+    filename.assign("testing-code.txt");
     try
     {
         CodeValidator::validate(filename);

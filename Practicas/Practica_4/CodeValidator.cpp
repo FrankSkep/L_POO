@@ -1,50 +1,42 @@
 #include "CodeValidator.h"
 #include <stack>
 #include <fstream>
+#include <unordered_map>
 
 void CodeValidator::validate(const string &filename)
 {
-    std::vector<string> contenido = ReadFile(filename);
+    std::vector<string> content = ReadFile(filename);
     std::stack<char> delimiterStack;
 
-    for (int i = 0; i < contenido.size(); i++)
+    std::unordered_map<char, char> delimiters = {
+        {')', '('},
+        {']', '['},
+        {'}', '{'}};
+
+    for (int i = 0; i < content.size(); i++)
     {
-        const string &line = contenido[i];
-        for (char c : line)
+        const string &line = content[i];
+        for (auto c : line)
         {
-            switch (c)
+            // Si es un delimitador de apertura
+            if (c == '(' || c == '[' || c == '{')
             {
-            case '(':
-            case '[':
-            case '{':
                 delimiterStack.push(c);
-                break;
-            case ')':
-                if (delimiterStack.empty() || delimiterStack.top() != '(')
+            }
+            // Si es un delimitador de cierre
+            else if (delimiters.count(c))
+            {
+                cout << "c: " << c << " [c]: " << delimiters[c] << endl;
+                if (delimiterStack.empty() || delimiterStack.top() != delimiters[c])
                 {
                     cout << "Error en la linea " << i + 1 << ": Delimitador " << c << " no coincide" << endl;
                     return;
                 }
                 delimiterStack.pop();
-                break;
-            case ']':
-                if (delimiterStack.empty() || delimiterStack.top() != '[')
-                {
-                    cout << "Error en la linea " << i + 1 << ": Delimitador " << c << " no coincide" << endl;
-                    return;
-                }
-                delimiterStack.pop();
-                break;
-            case '}':
-                if (delimiterStack.empty() || delimiterStack.top() != '{')
-                {
-                    cout << "Error en la linea " << i + 1 << ": Delimitador " << c << " no coincide" << endl;
-                    return;
-                }
-                delimiterStack.pop();
-                break;
-            case '"':
-            case '\'':
+            }
+            // Si es una comilla simple o doble
+            else if (c == '"' || c == '\'')
+            {
                 if (!delimiterStack.empty() && delimiterStack.top() == c)
                 {
                     delimiterStack.pop();
@@ -53,7 +45,6 @@ void CodeValidator::validate(const string &filename)
                 {
                     delimiterStack.push(c);
                 }
-                break;
             }
         }
     }
