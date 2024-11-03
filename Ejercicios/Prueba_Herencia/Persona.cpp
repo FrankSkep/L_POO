@@ -1,5 +1,7 @@
 #include "Persona.h"
 
+using std::cout;
+
 Persona::Persona(string nombre, int edad)
 {
     this->nombre = nombre;
